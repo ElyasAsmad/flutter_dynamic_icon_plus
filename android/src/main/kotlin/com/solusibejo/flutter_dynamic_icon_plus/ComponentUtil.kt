@@ -169,6 +169,34 @@ object ComponentUtil {
         }
     }
 
+    fun revertToDefaultIcon(context: Context, packageManager: PackageManager) {
+
+        val currentlyEnabled = getCurrentEnabledAlias(context)
+
+        val mainComponents = getComponentNames(context, null)
+
+        val mainActivity = mainComponents.firstOrNull()
+
+        if (mainActivity != null && currentlyEnabled != null) {
+            Log.d(
+                "revertToDefaultIcon",
+                String.format(
+                    "Reverting from %s to default icon %s",
+                    currentlyEnabled.name, mainActivity.className
+                )
+            )
+            
+            // Enable the main activity
+            enable(context, packageManager, mainActivity.className)
+            
+            // Disable the currently enabled activity-alias
+            disable(context, packageManager, currentlyEnabled.name)
+            
+            // Clear saved icon preference
+            removeCurrentAppIcon(context)
+        }
+    }
+    
     fun removeCurrentAppIcon(context: Context){
         val sp = context.getSharedPreferences(FlutterDynamicIconPlusPlugin.pluginName, Context.MODE_PRIVATE)
         sp.edit()?.remove(FlutterDynamicIconPlusPlugin.appIcon)?.apply()
