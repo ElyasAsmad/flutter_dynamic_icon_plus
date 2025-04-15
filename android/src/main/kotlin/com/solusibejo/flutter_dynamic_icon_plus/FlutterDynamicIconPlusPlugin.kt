@@ -53,24 +53,19 @@ class FlutterDynamicIconPlusPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
 
           Log.d("setAlternateIconName", "Saved app icon status: $saved")
 
-          if(saved == true){
-            if(containsOnBlacklist(brandsInString, manufacturesInString, modelsInString)){
-              if(activity != null){
-                if(iconName != null){
-                  ComponentUtil.changeAppIcon(
-                    activity!!,
-                    activity!!.packageManager,
-                    activity!!.packageName
-                  )
-                }
-
-                ComponentUtil.removeCurrentAppIcon(activity!!)
+          if(saved == true) {
+              if (iconName == null) {
+                ComponentUtil.revertToDefaultIcon(
+                  activity!!,
+                  activity!!.packageManager
+                )
+              } else {
+                ComponentUtil.changeAppIcon(
+                  activity!!,
+                  activity!!.packageManager,
+                  activity!!.packageName
+                )
               }
-            }
-            else {
-              val flutterDynamicIconPlusService = Intent(activity, FlutterDynamicIconPlusService::class.java)
-              activity?.startService(flutterDynamicIconPlusService)
-            }
 
             result.success(true)
           }
