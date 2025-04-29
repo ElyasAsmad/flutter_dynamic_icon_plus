@@ -170,11 +170,8 @@ object ComponentUtil {
     }
 
     fun revertToDefaultIcon(context: Context, packageManager: PackageManager) {
-
         val currentlyEnabled = getCurrentEnabledAlias(context)
-
         val mainComponents = getComponentNames(context, null)
-
         val mainActivity = mainComponents.firstOrNull()
 
         if (mainActivity != null && currentlyEnabled != null) {
