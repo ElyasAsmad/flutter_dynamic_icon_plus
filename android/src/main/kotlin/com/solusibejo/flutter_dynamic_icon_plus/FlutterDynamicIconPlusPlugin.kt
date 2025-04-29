@@ -55,10 +55,12 @@ class FlutterDynamicIconPlusPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
 
           if(saved == true) {
               if (iconName == null) {
-                ComponentUtil.revertToDefaultIcon(
-                  activity!!,
-                  activity!!.packageManager
-                )
+                val flutterDynamicIconPlusService = Intent(activity, FlutterDynamicIconPlusRevertIconService::class.java)
+                activity?.startService(flutterDynamicIconPlusService)
+                // ComponentUtil.revertToDefaultIcon(
+                //   activity!!,
+                //   activity!!.packageManager
+                // )
               } else {
                 val flutterDynamicIconPlusService = Intent(activity, FlutterDynamicIconPlusService::class.java)
                 activity?.startService(flutterDynamicIconPlusService)
