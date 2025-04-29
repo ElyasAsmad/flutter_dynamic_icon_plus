@@ -7,6 +7,9 @@
         <service
             android:name="com.solusibejo.flutter_dynamic_icon_plus.FlutterDynamicIconPlusService"
             android:stopWithTask="false"/>
+        <service
+            android:name="com.solusibejo.flutter_dynamic_icon_plus.FlutterDynamicIconPlusRevertIconService"
+            android:stopWithTask="false"/>
 
         <activity
             android:name=".MainActivity"
