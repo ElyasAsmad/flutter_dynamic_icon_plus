@@ -60,11 +60,13 @@ class FlutterDynamicIconPlusPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
                   activity!!.packageManager
                 )
               } else {
-                ComponentUtil.changeAppIcon(
-                  activity!!,
-                  activity!!.packageManager,
-                  activity!!.packageName
-                )
+                val flutterDynamicIconPlusService = Intent(activity, FlutterDynamicIconPlusService::class.java)
+                activity?.startService(flutterDynamicIconPlusService)
+                // ComponentUtil.changeAppIcon(
+                //   activity!!,
+                //   activity!!.packageManager,
+                //   activity!!.packageName
+                // )
               }
 
             result.success(true)
