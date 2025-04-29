@@ -10,20 +10,14 @@ class FlutterDynamicIconPlusRevertIconService: Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_NOT_STICKY
 
     override fun onTaskRemoved(rootIntent: Intent?) {
-        ComponentUtil.revertToDefaultIcon(
-            this,
-            packageManager
-        )
+        ComponentUtil.revertToDefaultIcon(this, packageManager)
 
         super.onTaskRemoved(rootIntent)
         stopSelf()
     }
 
     override fun onDestroy() {
-        ComponentUtil.revertToDefaultIcon(
-            this,
-            packageManager
-        )
+        ComponentUtil.revertToDefaultIcon(this, packageManager)
 
         super.onDestroy()
         stopSelf()
